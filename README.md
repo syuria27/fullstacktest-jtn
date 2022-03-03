@@ -1,4 +1,4 @@
-## FullstactTest Application
+## FullstackTest Application
 
 Ini adalah aplikasi fullstack yang dibuat oleh Syukron Rizqi Ardhi untuk tujuan tes kemampuan untuk masuk kerja sebagai Fullstack Dev atau Backend Dev di JTN/JTI
 
@@ -61,7 +61,7 @@ the definition of its Docker container can be found in
 
 ```yml
 test-postgres:
-    image: "postgres:14.6-alpine"
+    image: "postgres:14.2-alpine"
     container_name: test-postgres
     #volumes:
       #- scrum-data:/var/lib/postgresql/data
