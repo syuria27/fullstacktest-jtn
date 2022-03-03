@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" >
+    <a mat-button routerLink="/">Fullstack Test </a>
+    <span>{{getUser.displayName}}</span>
+    <div>
+      <button *ngIf="!isLoggedIn" class="mat-raised-button" (click)="login()">
+        Sign In with Google
+      </button>
+      <button *ngIf="isLoggedIn" class="mat-raised-button" (click)="logout()">
+        logout
+      </button>
+    </div>
+</mat-toolbar>
+
+<mat-tab-group *ngIf="isLoggedIn" mat-align-tabs="center" animationDuration="1000ms">
+  <mat-tab label="Input"><app-input></app-input></mat-tab>
+  <mat-tab label="Output"><app-output></app-output></mat-tab>
+</mat-tab-group>
+<router-outlet></router-outlet>

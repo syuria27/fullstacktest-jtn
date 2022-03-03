@@ -1,0 +1,79 @@
+<div fxLayout="row" fxLayoutAlign="end center">
+  <button mat-button color="primary" (click)="getOutput()" >Refresh</button>
+</div>
+
+<table style="width: 100%; vertical-align: top;">
+  <tr>
+    <th>Ganjil</th>
+    <th>Genap</th>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; border: 1px solid black;">
+      <table style="width: 100%; text-align: center;" mat-table [dataSource]="oddDataSource">
+        <ng-container matColumnDef="id">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="noHp">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Phone Number</th>
+          <td mat-cell *matCellDef="let element"> {{element.noHp}} </td>
+        </ng-container>
+        <ng-container matColumnDef="provider">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Provider</th>
+          <td mat-cell *matCellDef="let element"> {{element.provider}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="openDialog(element)" mat-icon-button matTooltip="Edit" color="primary">
+              <mat-icon>cached</mat-icon>
+            </button>
+
+            <button (click)="deletePhoneNo(element.id, 'odd')" mat-icon-button matTooltip="Delete" color="accent">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="oddDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: oddDisplayedColumns;"></tr>
+      </table>
+      <mat-paginator #TableOddPaginator="matPaginator" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+    </td>
+    <td style="vertical-align: top; border: 1px solid black;" >
+      <table style="width: 100%; text-align: center;" mat-table [dataSource]="evenDataSource">
+        <ng-container matColumnDef="id">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="noHp">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Phone Number</th>
+          <td mat-cell *matCellDef="let element"> {{element.noHp}} </td>
+        </ng-container>
+        <ng-container matColumnDef="provider">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Provider</th>
+          <td mat-cell *matCellDef="let element"> {{element.provider}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="openDialog(element)" mat-icon-button matTooltip="Edit" color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button (click)="deletePhoneNo(element.id, 'even')" mat-icon-button matTooltip="Delete" color="accent">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="evenDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: evenDisplayedColumns;"></tr>
+      </table>
+      <mat-paginator #TableEvenPaginator="matPaginator" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </td>
+  </tr>
+</table>

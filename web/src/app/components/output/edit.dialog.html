@@ -1,0 +1,29 @@
+<div fxLayoutAlign="center center" fxFlexFill style="padding-bottom: 10px; padding-top: 10px;">
+  <mat-card>
+    <mat-toolbar color="primary" fxLayoutAlign="center center" style="margin-bottom: 10px;">Edit No Handphone</mat-toolbar>
+    <div fxLayoutAlign="stretch" fxLayout="column" >
+      <mat-form-field appearance="outline">
+        <mat-label>No Handphone</mat-label>
+        <input matInput placeholder="085876396553" maxlength="15" [(ngModel)]="local_data.noHp" pattern="\d*">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Provider</mat-label>
+        <mat-select [disabled]="!local_data.noHp" [(value)]="local_data.provider">
+          <mat-option value="Telkomsel">Telkomsel</mat-option>
+          <mat-option value="Axis">Axis</mat-option>
+          <mat-option value="Indosat">Indosat</mat-option>
+          <mat-option value="XL">XL</mat-option>
+          <mat-option value="Three">Three</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div fxLayoutAlign="end">
+        <button mat-button color="accent" (click)="doAction()" [disabled]="!local_data.noHp || !local_data.provider" >Edit</button>
+        <button mat-button color="primary" (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </div>
+  </mat-card>
+</div>

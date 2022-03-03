@@ -1,0 +1,55 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3'
+
+#Define services
+services:
+
+  #PostgreSQL Database for the application
+  test-postgres:
+    image: "postgres:14.2-alpine"
+    container_name: test-postgres
+    #Volume mounted for database for the storage
+    #volumes:
+    #  - test-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432 # Forward the exposed port 5432 on the container to port 5432 on the host machine
+
+    #Environment variable for DB name, user and password
+    environment:
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  #Back-end Spring Boot Application
+  test-api:
+    #The docker file in api-app build the jar and provides the docker image with the following name.
+    build: ./api
+    container_name: test-api
+    depends_on:
+      - test-postgres
+
+    #Environment variables for Spring Boot Application.
+    environment:
+      - POSTGRES_HOST=test-postgres
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    links:
+      - test-postgres
+
+  #Fron-end Angular Application with Nginx
+  test-web:
+    build: ./web
+    container_name: test-web
+    depends_on:
+      - test-api
+    ports:
+      - 80:80
+    links:
+      - test-api
+
+#Volumes for DB data
+#volumes:
+  #test-data:

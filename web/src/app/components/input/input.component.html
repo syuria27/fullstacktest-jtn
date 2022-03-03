@@ -1,0 +1,30 @@
+<div fxLayoutAlign="center center" fxFlexFill style="padding-bottom: 10px; padding-top: 10px;">
+  <mat-card fxFlex=25>
+    <mat-toolbar color="primary" fxLayoutAlign="center center" style="margin-bottom: 10px;">Data No Handphone</mat-toolbar>
+    <div fxLayoutAlign="stretch" fxLayout="column" >
+      <mat-form-field appearance="outline">
+        <mat-label>No Handphone</mat-label>
+        <input matInput placeholder="085876396553" maxlength="15" [(ngModel)]="nohp" pattern="\d*">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Provider</mat-label>
+        <mat-select [disabled]="!nohp" [(value)]="provider">
+          <mat-option value="Telkomsel">Telkomsel</mat-option>
+          <mat-option value="Axis">Axis</mat-option>
+          <mat-option value="Indosat">Indosat</mat-option>
+          <mat-option value="XL">XL</mat-option>
+          <mat-option value="Three">Three</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div fxLayoutAlign="end">
+        <button mat-raised-button color="primary" [disabled]="!nohp || !provider" (click)="savePhoneNo()">Save</button>
+        <div style="padding: 5px;"></div>
+        <button mat-raised-button color="accent" (click)="getAuto()">Auto</button>
+      </div>
+    </div>
+  </mat-card>
+</div>
