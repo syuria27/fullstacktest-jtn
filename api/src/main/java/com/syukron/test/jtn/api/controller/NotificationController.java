@@ -17,7 +17,7 @@ public class NotificationController {
 
     @MessageMapping("/notification")
     @SendTo("/topic/notification")
-    public String greeting(String message) throws Exception {
+    public String notification(String message) throws Exception {
         log.info("Notification in = "+message);
         Thread.sleep(2000);
         return "Notification "+message;
