@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../../services/api.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-input',
@@ -15,10 +16,12 @@ export class InputComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private notifService: NotificationService,
     private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
+    this.notifService.connect()
   }
 
   getAuto() {
@@ -28,6 +31,7 @@ export class InputComponent implements OnInit {
           this.data = data;
 
           if(!this.data.error) {
+            this.notifService.sendNotif("Success create auto phone number");
             this._snackBar.open("Success create auto phone number", "OK");
           } else {
             this._snackBar.open(this.data.message, "OK");
@@ -45,6 +49,7 @@ export class InputComponent implements OnInit {
 
           if(!this.data.error) {
             this.nohp = '';
+            this.notifService.sendNotif("Success create phone number");
             this._snackBar.open("Success create phone number", "OK");
           } else {
             this._snackBar.open(this.data.message, "OK");

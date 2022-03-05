@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../../services/api.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-output',
@@ -27,14 +28,16 @@ export class OutputComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
+    private notifService: NotificationService,
     private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
     this.getOutput();
-    setInterval(() => {
+    this.notifService.componentMethodCalled$.subscribe((value: any) => {
+      //alert(value);
       this.getOutput();
-    }, 30000);
+    })
   }
 
   getOutput() {
