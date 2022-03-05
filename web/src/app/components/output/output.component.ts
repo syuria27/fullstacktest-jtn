@@ -75,6 +75,7 @@ export class OutputComponent implements OnInit {
 
           if(!this.dataEdit.error) {
             this.getOutput();
+            this.notifService.sendNotif("Success update phone number");
             this._snackBar.open("Success update phone number", "OK");
           } else {
             this._snackBar.open(this.dataEdit.message, "OK");
@@ -102,6 +103,7 @@ export class OutputComponent implements OnInit {
 
 
           if(!this.data.error) {
+            this.notifService.sendNotif("Success delete phone number");
             this._snackBar.open("Success delete phone number", "OK");
           } else {
             this._snackBar.open(this.data.message, "OK");
