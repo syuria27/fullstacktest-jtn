@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import {
-  Auth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from '@angular/fire/auth';
-
 
 @Component({
   selector: 'app-root',
