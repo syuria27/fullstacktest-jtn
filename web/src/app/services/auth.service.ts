@@ -13,9 +13,10 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   loggedIn: boolean = false;
+  localStorageItem: string = 'userInfoWebSyukron';
 
   constructor(private auth: Auth) {
-    this.loggedIn = !!localStorage.getItem('userInfo');
+    this.loggedIn = !!localStorage.getItem(this.localStorageItem);
   }
 
   sudahLogin(): boolean {
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
   getUserInfo(): any {
-    return JSON.parse(localStorage.getItem('userInfo') || '{}');
+    return JSON.parse(localStorage.getItem(this.localStorageItem) || '{}');
   }
 
   loginWithGoogle() {
@@ -36,7 +37,7 @@ export class AuthService {
         )
       )
       .then((result) => {
-        localStorage.setItem('userInfo', JSON.stringify(result.user));
+        localStorage.setItem(this.localStorageItem, JSON.stringify(result.user));
         this.loggedIn = true;
         console.log(JSON.stringify(result.user));
         console.log('You have been successfully logged in!')
@@ -47,7 +48,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem(this.localStorageItem);
     this.loggedIn = false;
     return signOut(this.auth);
   }
